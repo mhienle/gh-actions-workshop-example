@@ -22,3 +22,5 @@ outputs:
 runs:
   using: node20
   main: dist/index.js
+
+author: "Michael Hienle"
