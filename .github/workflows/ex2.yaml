@@ -22,3 +22,19 @@ jobs:
         run: npm run test
       - name: Execute build
         run: npm run build
+      - name: upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+  cd-pipeline:
+    needs: ci-pipeline
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.ci-pipeline.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
